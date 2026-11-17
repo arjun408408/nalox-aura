@@ -142,6 +142,22 @@ p.lead{text-align:center;color:var(--dim);max-width:620px;margin:0 auto;font-siz
 .pro-side .big{font:800 34px 'Sora';background:linear-gradient(90deg,#ffb3c1,var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
 .pro-side p{font-size:14px;margin:10px 0 20px}
 
+/* download */
+.dl-box{margin-top:44px;text-align:center;background:linear-gradient(160deg,rgba(47,123,255,.14),rgba(20,42,96,.45) 60%);border:1px solid rgba(140,195,255,.4);border-radius:24px;padding:42px 30px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+.dl-meta{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin-bottom:24px}
+.dl-meta span{font-size:13px;font-weight:600;color:#bcd6ff;background:rgba(56,150,255,.12);border:1px solid var(--line);padding:6px 14px;border-radius:999px}
+.dl-inside{display:flex;gap:10px;justify-content:center;flex-wrap:wrap;margin:24px auto 26px;max-width:660px}
+.dl-inside span{font-size:13.5px;color:#dceaff;background:rgba(5,10,28,.5);border:1px solid var(--line);padding:8px 15px;border-radius:12px}
+.steps.three{grid-template-columns:repeat(3,1fr)}
+@media(max-width:960px){.steps.three{grid-template-columns:1fr}}
+
+/* pro flow */
+.pro-flow{grid-column:1/-1;border-top:1px dashed rgba(255,150,170,.35);padding-top:30px}
+.pro-flow h4{font:700 21px 'Sora','Noto Sans Devanagari',sans-serif;text-align:center;margin-bottom:6px}
+.pro-flow .sub{text-align:center;color:var(--dim);font-size:14.5px}
+.pro-flow .steps{margin-top:28px}
+.pro-cta{text-align:center;margin-top:28px}
+
 /* help + contact */
 .help-box{margin-top:44px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:46px 30px}
 .help-box .ficon{margin:0 auto 16px;width:58px;height:58px;font-size:28px}
@@ -162,6 +178,7 @@ footer .brand em{font-style:normal;color:var(--red)}
   <div class="wrap nav-in">
     <a class="logo" href="#top"><span class="logo-badge">✦</span><span>Nalox <em>Aura</em></span></a>
     <div class="nav-links">
+      <a href="#download" data-en="Download" data-hi="डाउनलोड">Download</a>
       <a href="#features" data-en="Features" data-hi="फीचर्स">Features</a>
       <a href="#how" data-en="How It Works" data-hi="कैसे काम करता है">How It Works</a>
       <a href="#tutorial" data-en="Tutorial" data-hi="ट्यूटोरियल">Tutorial</a>
@@ -181,7 +198,8 @@ footer .brand em{font-style:normal;color:var(--red)}
     <h1>Nalox <span class="grad">Aura</span><br><span data-en="Edit Faster." data-hi="एडिटिंग, अब और तेज़।">Edit Faster.</span> <span class="red" data-en="Create Better." data-hi="क्रिएट करो बेहतर।">Create Better.</span></h1>
     <p class="sub" data-en="The all-in-one After Effects panel — fonts, presets, animations, captions, graphs, tracking, slow motion, SFX and an AI that builds projects for you. Everything inside one beautiful panel." data-hi="ऑल-इन-वन After Effects पैनल — फ़ॉन्ट्स, प्रीसेट्स, एनिमेशन, कैप्शन, ग्राफ़, ट्रैकिंग, स्लो मोशन, SFX और एक AI जो आपके लिए प्रोजेक्ट बनाता है। सब कुछ एक ही खूबसूरत पैनल में।">The all-in-one After Effects panel — fonts, presets, animations, captions, graphs, tracking, slow motion, SFX and an AI that builds projects for you. Everything inside one beautiful panel.</p>
     <div class="hero-cta">
-      <a class="btn" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 Get Nalox Aura — DM on Instagram" data-hi="📩 Nalox Aura लो — Instagram पर DM करो">📩 Get Nalox Aura — DM on Instagram</a>
+      <a class="btn" href="https://github.com/arjun408408/nalox-aura/releases/download/v5.0/nalox-aura-v5.0.zip" data-en="⬇ Download Nalox Aura — Free" data-hi="⬇ Nalox Aura डाउनलोड करो — बिल्कुल मुफ़्त">⬇ Download Nalox Aura — Free</a>
+      <a class="btn ghost" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 DM on Instagram" data-hi="📩 Instagram पर DM करो">📩 DM on Instagram</a>
       <a class="btn ghost" href="#features" data-en="Explore Features ↓" data-hi="फीचर्स देखो ↓">Explore Features ↓</a>
     </div>
     <div class="madeby" data-en="Made by" data-hi="बनाया गया">Made by</div>
@@ -203,6 +221,33 @@ footer .brand em{font-style:normal;color:var(--red)}
     </div>
   </div>
 </header>
+
+<section id="download">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Free Download" data-hi="मुफ़्त डाउनलोड">Free Download</div>
+    <h2 class="title reveal" data-en="Download Nalox Aura" data-hi="Nalox Aura डाउनलोड करो">Download Nalox Aura</h2>
+    <p class="lead reveal" data-en="One small zip — the complete panel with every feature inside. Download it, install it in about two minutes, and start editing faster today." data-hi="एक छोटी-सी zip — अंदर हर फ़ीचर के साथ पूरा पैनल। डाउनलोड करो, लगभग दो मिनट में इंस्टॉल करो, और आज से ही तेज़ एडिटिंग शुरू करो।">One small zip — the complete panel with every feature inside. Download it, install it in about two minutes, and start editing faster today.</p>
+    <div class="dl-box reveal">
+      <div class="dl-meta">
+        <span data-en="Version v5.0" data-hi="वर्शन v5.0">Version v5.0</span>
+        <span data-en="Size ~2.4 MB" data-hi="साइज़ ~2.4 MB">Size ~2.4 MB</span>
+        <span data-en="Windows · After Effects 2020 and above" data-hi="Windows · After Effects 2020 और ऊपर">Windows · After Effects 2020 and above</span>
+      </div>
+      <a class="btn" href="https://github.com/arjun408408/nalox-aura/releases/download/v5.0/nalox-aura-v5.0.zip" data-en="⬇ Download Nalox Aura v5.0 — Free" data-hi="⬇ Nalox Aura v5.0 डाउनलोड करो — मुफ़्त">⬇ Download Nalox Aura v5.0 — Free</a>
+      <div class="dl-inside">
+        <span data-en="🧩 The full Nalox Aura panel" data-hi="🧩 पूरा Nalox Aura पैनल">🧩 The full Nalox Aura panel</span>
+        <span data-en="🎛️ All 55 presets included" data-hi="🎛️ सभी 55 प्रीसेट्स शामिल">🎛️ All 55 presets included</span>
+        <span data-en="⚡ INSTALL.bat — one-click installer" data-hi="⚡ INSTALL.bat — एक-क्लिक इंस्टॉलर">⚡ INSTALL.bat — one-click installer</span>
+      </div>
+      <p style="color:var(--dim);font-size:14px" data-en="No account, no sign-up — the download starts right away." data-hi="कोई अकाउंट नहीं, कोई साइन-अप नहीं — डाउनलोड तुरंत शुरू हो जाता है।">No account, no sign-up — the download starts right away.</p>
+    </div>
+    <div class="steps three">
+      <div class="step reveal"><div class="snum">1</div><h3 data-en="Download" data-hi="डाउनलोड करो">Download</h3><p data-en="Click the download button and save the zip file (about 2.4 MB) anywhere on your PC." data-hi="डाउनलोड बटन दबाओ और zip फ़ाइल (लगभग 2.4 MB) अपने PC पर कहीं भी सेव करो।">Click the download button and save the zip file (about 2.4 MB) anywhere on your PC.</p></div>
+      <div class="step reveal"><div class="snum">2</div><h3 data-en="Unzip & Install" data-hi="अनज़िप और इंस्टॉल करो">Unzip & Install</h3><p data-en="Unzip the file, then double-click INSTALL.bat — it sets everything up automatically." data-hi="फ़ाइल अनज़िप करो, फिर INSTALL.bat पर डबल-क्लिक करो — यह सब कुछ अपने आप सेट कर देता है।">Unzip the file, then double-click INSTALL.bat — it sets everything up automatically.</p></div>
+      <div class="step reveal"><div class="snum">3</div><h3 data-en="Open After Effects" data-hi="After Effects खोलो">Open After Effects</h3><p data-en="Open After Effects and go to Window → Extensions → Nalox Aura. That's it — start editing!" data-hi="After Effects खोलो और Window → Extensions → Nalox Aura पर जाओ। बस हो गया — एडिटिंग शुरू करो!">Open After Effects and go to Window → Extensions → Nalox Aura. That's it — start editing!</p></div>
+    </div>
+  </div>
+</section>
 
 <section id="features">
   <div class="wrap">
@@ -305,6 +350,17 @@ footer .brand em{font-style:normal;color:var(--red)}
         <div class="big">PRO</div>
         <p data-en="Unlock Nalox AI with your personal code. To get your code, send your Machine Code in an Instagram DM — we reply with your 6-digit key." data-hi="अपने पर्सनल कोड से Nalox AI अनलॉक करो। कोड पाने के लिए अपना Machine Code Instagram DM में भेजो — हम आपके 6-अंकों के कोड के साथ जवाब देंगे।">Unlock Nalox AI with your personal code. To get your code, send your Machine Code in an Instagram DM — we reply with your 6-digit key.</p>
         <a class="btn red" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 DM to Unlock PRO" data-hi="📩 PRO अनलॉक के लिए DM करो">📩 DM to Unlock PRO</a>
+      </div>
+      <div class="pro-flow">
+        <h4 data-en="Get the Full Plan — 4 Simple Steps" data-hi="फुल प्लान लो — 4 आसान स्टेप्स">Get the Full Plan — 4 Simple Steps</h4>
+        <p class="sub" data-en="The panel itself is free for everyone. Only Nalox AI needs the full plan — here is exactly how to get it:" data-hi="पैनल खुद सबके लिए मुफ़्त है। सिर्फ़ Nalox AI के लिए फुल प्लान चाहिए — उसे पाने का तरीका बिल्कुल साफ़ है:">The panel itself is free for everyone. Only Nalox AI needs the full plan — here is exactly how to get it:</p>
+        <div class="steps">
+          <div class="step"><div class="snum">1</div><h3 data-en="Download & Install — Free" data-hi="डाउनलोड और इंस्टॉल करो — मुफ़्त">Download & Install — Free</h3><p data-en="Download Nalox Aura from this page and install it. Everything works — every feature is included, nothing is missing." data-hi="इस पेज से Nalox Aura डाउनलोड करके इंस्टॉल करो। सब कुछ काम करता है — हर फ़ीचर शामिल है, कुछ भी कम नहीं है।">Download Nalox Aura from this page and install it. Everything works — every feature is included, nothing is missing.</p></div>
+          <div class="step"><div class="snum">2</div><h3 data-en="Open the Nalox AI Tab" data-hi="Nalox AI टैब खोलो">Open the Nalox AI Tab</h3><p data-en="In the panel, open the Nalox AI tab — that is the PRO feature, marked with a red PRO badge." data-hi="पैनल में Nalox AI टैब खोलो — यही PRO फ़ीचर है, लाल PRO निशान के साथ।">In the panel, open the Nalox AI tab — that is the PRO feature, marked with a red PRO badge.</p></div>
+          <div class="step"><div class="snum">3</div><h3 data-en="DM Your Machine Code" data-hi="अपना Machine Code DM करो">DM Your Machine Code</h3><p data-en="The red unlock card shows your Machine Code. DM that code to @nalox_ff on Instagram to buy the full plan." data-hi="लाल अनलॉक कार्ड पर आपका Machine Code दिखता है। फुल प्लान खरीदने के लिए वह कोड Instagram पर @nalox_ff को DM करो।">The red unlock card shows your Machine Code. DM that code to @nalox_ff on Instagram to buy the full plan.</p></div>
+          <div class="step"><div class="snum">4</div><h3 data-en="Enter Your 6-Digit Code" data-hi="अपना 6-अंकों का कोड डालो">Enter Your 6-Digit Code</h3><p data-en="You receive a personal 6-digit code that works only on your PC. Type it in the panel — PRO is unlocked." data-hi="आपको एक पर्सनल 6-अंकों का कोड मिलेगा जो सिर्फ़ आपके PC पर चलता है। उसे पैनल में डालो — PRO अनलॉक हो जाएगा।">You receive a personal 6-digit code that works only on your PC. Type it in the panel — PRO is unlocked.</p></div>
+        </div>
+        <div class="pro-cta"><a class="btn red" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 DM @nalox_ff on Instagram" data-hi="📩 Instagram पर @nalox_ff को DM करो">📩 DM @nalox_ff on Instagram</a></div>
       </div>
     </div>
   </div>
