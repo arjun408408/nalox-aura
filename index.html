@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Nalox Aura — All-in-One After Effects Panel</title>
+<meta name="description" content="Nalox Aura is the all-in-one After Effects panel: fonts, presets, text animations, captions, graphs, tracking, slow motion, SFX, downloader and Nalox AI. Made by Nalox.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@500;700;800&family=Inter:wght@400;500;600;700&family=Noto+Sans+Devanagari:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#04081a; --bg2:#071230; --panel:rgba(96,150,255,.07); --panel2:rgba(96,150,255,.12);
+  --line:rgba(120,175,255,.18); --blue:#2f7bff; --cyan:#38b6ff; --red:#ff3b5c;
+  --txt:#eaf2ff; --dim:#9db4dd; --dim2:#6f87b3;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html{scroll-behavior:smooth}
+body{background:var(--bg);color:var(--txt);font-family:'Inter','Noto Sans Devanagari',system-ui,sans-serif;overflow-x:hidden;line-height:1.6}
+h1,h2,h3,.brand{font-family:'Sora','Noto Sans Devanagari',sans-serif}
+a{text-decoration:none;color:inherit}
+.wrap{max-width:1160px;margin:0 auto;padding:0 22px}
+::selection{background:var(--blue);color:#fff}
+
+/* ambient background */
+.aurora{position:fixed;inset:0;z-index:-2;background:
+  radial-gradient(900px 500px at 15% -5%,rgba(47,123,255,.28),transparent 60%),
+  radial-gradient(800px 480px at 90% 10%,rgba(56,182,255,.16),transparent 60%),
+  radial-gradient(700px 600px at 50% 110%,rgba(255,59,92,.10),transparent 60%),
+  linear-gradient(180deg,#050b22 0%,var(--bg) 45%,#03061a 100%)}
+.grid-bg{position:fixed;inset:0;z-index:-1;opacity:.35;background-image:linear-gradient(rgba(90,140,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(90,140,255,.05) 1px,transparent 1px);background-size:56px 56px;mask-image:radial-gradient(ellipse 90% 60% at 50% 0%,#000 30%,transparent 75%)}
+.orb{position:fixed;border-radius:50%;filter:blur(70px);z-index:-1;opacity:.5;animation:drift 16s ease-in-out infinite alternate}
+.orb.a{width:340px;height:340px;background:#1c4fd6;top:6%;left:-120px}
+.orb.b{width:260px;height:260px;background:#0e7fc4;top:55%;right:-100px;animation-delay:-6s}
+.orb.c{width:180px;height:180px;background:#c22444;bottom:-60px;left:38%;opacity:.28;animation-delay:-11s}
+@keyframes drift{from{transform:translateY(-24px) translateX(0)}to{transform:translateY(30px) translateX(26px)}}
+
+/* nav */
+nav{position:sticky;top:0;z-index:50;backdrop-filter:blur(14px);background:rgba(4,9,26,.72);border-bottom:1px solid var(--line)}
+.nav-in{display:flex;align-items:center;gap:18px;height:64px}
+.logo{display:flex;align-items:center;gap:11px;font-weight:800;font-size:20px;letter-spacing:.3px}
+.logo-badge{width:38px;height:38px;border-radius:11px;background:linear-gradient(135deg,var(--blue),var(--cyan));display:grid;place-items:center;font-size:19px;box-shadow:0 0 22px rgba(56,150,255,.55);border:1px solid rgba(160,210,255,.5)}
+.logo span em{font-style:normal;background:linear-gradient(90deg,var(--cyan),#8fd0ff);-webkit-background-clip:text;background-clip:text;color:transparent}
+.nav-links{display:flex;gap:22px;margin-left:auto;font-size:14.5px;color:var(--dim);font-weight:500}
+.nav-links a:hover{color:#fff}
+.lang-toggle{display:flex;background:rgba(90,140,255,.12);border:1px solid var(--line);border-radius:999px;padding:3px;margin-left:8px}
+.lang-toggle button{border:0;background:transparent;color:var(--dim);font:600 13px 'Inter';padding:5px 13px;border-radius:999px;cursor:pointer;transition:.25s}
+.lang-toggle button.on{background:linear-gradient(135deg,var(--blue),var(--cyan));color:#fff;box-shadow:0 0 14px rgba(56,150,255,.6)}
+.btn{display:inline-flex;align-items:center;gap:9px;font-weight:700;font-size:15px;padding:13px 26px;border-radius:14px;border:1px solid rgba(160,210,255,.45);background:linear-gradient(135deg,var(--blue),#1a5fe0);color:#fff;box-shadow:0 8px 30px rgba(47,123,255,.4);transition:.25s;cursor:pointer}
+.btn:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(47,123,255,.55)}
+.btn.red{background:linear-gradient(135deg,#ff4d6d,var(--red));border-color:rgba(255,150,170,.5);box-shadow:0 8px 30px rgba(255,59,92,.35)}
+.btn.red:hover{box-shadow:0 14px 38px rgba(255,59,92,.5)}
+.btn.ghost{background:rgba(96,150,255,.08);box-shadow:none;color:var(--txt)}
+.btn.ghost:hover{background:rgba(96,150,255,.16)}
+.btn.sm{padding:9px 18px;font-size:14px;border-radius:11px}
+@media(max-width:820px){.nav-links{display:none}}
+
+/* hero */
+.hero{padding:86px 0 70px;text-align:center;position:relative}
+.pill{display:inline-flex;gap:8px;align-items:center;font-size:13px;font-weight:600;color:#bcd6ff;background:rgba(56,150,255,.1);border:1px solid var(--line);padding:7px 16px;border-radius:999px}
+.pill i{width:8px;height:8px;border-radius:50%;background:#3dff8e;box-shadow:0 0 10px #3dff8e;animation:pulse 1.8s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.35}}
+.hero h1{font-size:clamp(42px,7.2vw,76px);font-weight:800;line-height:1.06;margin:26px 0 8px;letter-spacing:-1px}
+.hero h1 .grad{background:linear-gradient(92deg,#6db3ff 0%,var(--cyan) 45%,#a8dcff 80%);-webkit-background-clip:text;background-clip:text;color:transparent;filter:drop-shadow(0 0 26px rgba(56,182,255,.35))}
+.hero h1 .red{color:var(--red);text-shadow:0 0 30px rgba(255,59,92,.45)}
+.hero p.sub{max-width:640px;margin:16px auto 0;color:var(--dim);font-size:clamp(16px,2.2vw,19px)}
+.hero-cta{display:flex;gap:14px;justify-content:center;flex-wrap:wrap;margin-top:34px}
+.madeby{margin-top:22px;color:var(--dim2);font-size:14px;font-weight:600;letter-spacing:2.5px;text-transform:uppercase}
+.madeby b{color:#cfe4ff}
+
+/* panel mock */
+.mock{max-width:880px;margin:58px auto 0;background:linear-gradient(180deg,rgba(20,42,96,.85),rgba(8,17,44,.92));border:1px solid rgba(130,180,255,.3);border-radius:20px;box-shadow:0 40px 90px rgba(0,0,0,.55),0 0 70px rgba(47,123,255,.22);overflow:hidden;text-align:left;animation:floaty 7s ease-in-out infinite}
+@keyframes floaty{0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)}}
+.mock-bar{display:flex;align-items:center;gap:8px;padding:12px 16px;border-bottom:1px solid var(--line);background:rgba(10,22,54,.7)}
+.dot{width:11px;height:11px;border-radius:50%}
+.mock-title{margin-left:8px;font:700 13.5px 'Sora';color:#cfe4ff}
+.mock-title em{font-style:normal;color:var(--red)}
+.mock-tabs{display:flex;gap:7px;padding:13px 16px 0;flex-wrap:wrap}
+.mtab{font-size:12.5px;font-weight:600;color:var(--dim);background:rgba(96,150,255,.08);border:1px solid var(--line);padding:7px 13px;border-radius:9px}
+.mtab.on{color:#fff;background:linear-gradient(135deg,var(--blue),#1a5fe0);border-color:rgba(160,210,255,.5);box-shadow:0 0 16px rgba(47,123,255,.5)}
+.mtab.pro{color:#ffb3c1;border-color:rgba(255,59,92,.45)}
+.mock-body{display:grid;grid-template-columns:repeat(3,1fr);gap:11px;padding:15px 16px 18px}
+.mcard{background:rgba(96,150,255,.07);border:1px solid var(--line);border-radius:12px;padding:13px 14px;font-size:13px}
+.mcard b{display:block;font-size:13.5px;margin-bottom:3px}
+.mcard span{color:var(--dim2);font-size:12px}
+.mcard.hot{border-color:rgba(255,59,92,.5);background:rgba(255,59,92,.07)}
+@media(max-width:640px){.mock-body{grid-template-columns:repeat(2,1fr)}}
+
+/* sections */
+section{padding:78px 0 10px}
+.kicker{text-align:center;color:var(--cyan);font-weight:700;font-size:13px;letter-spacing:3.5px;text-transform:uppercase}
+h2.title{text-align:center;font-size:clamp(30px,4.6vw,44px);font-weight:800;margin:12px 0 10px;letter-spacing:-.5px}
+p.lead{text-align:center;color:var(--dim);max-width:620px;margin:0 auto;font-size:16.5px}
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .7s ease,transform .7s ease}
+.reveal.in{opacity:1;transform:none}
+
+/* features */
+.feat-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:16px;margin-top:44px}
+@media(max-width:960px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
+.fcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 22px;position:relative;overflow:hidden;transition:.3s}
+.fcard::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 200px at 20% -10%,rgba(56,182,255,.16),transparent 65%);opacity:0;transition:.3s}
+.fcard:hover{transform:translateY(-5px);border-color:rgba(140,195,255,.5);box-shadow:0 18px 44px rgba(10,40,110,.45)}
+.fcard:hover::before{opacity:1}
+.ficon{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,rgba(47,123,255,.35),rgba(56,182,255,.15));border:1px solid rgba(140,195,255,.35);margin-bottom:15px}
+.fcard h3{font-size:18px;margin-bottom:7px;display:flex;align-items:center;gap:9px;flex-wrap:wrap}
+.fcard p{color:var(--dim);font-size:14.5px}
+.tag{font:700 10.5px 'Inter';letter-spacing:1.2px;padding:3px 9px;border-radius:999px;background:linear-gradient(135deg,#ff4d6d,var(--red));color:#fff;box-shadow:0 0 14px rgba(255,59,92,.5)}
+.tag.blue{background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 0 14px rgba(56,150,255,.5)}
+.fcard.pro{border-color:rgba(255,59,92,.4);background:linear-gradient(180deg,rgba(255,59,92,.06),rgba(96,150,255,.05))}
+
+/* steps */
+.steps{display:grid;grid-template-columns:repeat(4,1fr);gap:16px;margin-top:44px}
+@media(max-width:960px){.steps{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:560px){.steps{grid-template-columns:1fr}}
+.step{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:26px 22px;transition:.3s}
+.step:hover{transform:translateY(-4px);border-color:rgba(140,195,255,.45)}
+.snum{width:42px;height:42px;border-radius:50%;display:grid;place-items:center;font:800 17px 'Sora';color:#fff;background:linear-gradient(135deg,var(--blue),var(--cyan));box-shadow:0 0 18px rgba(56,150,255,.55);margin-bottom:15px}
+.step h3{font-size:17px;margin-bottom:7px}
+.step p{color:var(--dim);font-size:14.5px}
+
+/* tutorial */
+.tuts{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-top:44px}
+@media(max-width:760px){.tuts{grid-template-columns:1fr}}
+.tut{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 24px 20px}
+.tut h3{font-size:17px;margin-bottom:12px;display:flex;gap:10px;align-items:center}
+.tut ol{margin-left:20px;color:var(--dim);font-size:14.5px}
+.tut ol li{margin-bottom:6px}
+.tut ol li b{color:#dceaff}
+
+/* pro / pricing */
+.pro-box{margin-top:44px;background:linear-gradient(160deg,rgba(255,59,92,.09),rgba(20,42,96,.5) 55%);border:1px solid rgba(255,59,92,.4);border-radius:24px;padding:42px 38px;display:grid;grid-template-columns:1.15fr .85fr;gap:36px;box-shadow:0 30px 70px rgba(0,0,0,.4)}
+@media(max-width:820px){.pro-box{grid-template-columns:1fr;padding:32px 24px}}
+.pro-box h3{font-size:27px;margin-bottom:12px}
+.pro-box h3 .red{color:var(--red)}
+.pro-box p{color:var(--dim);font-size:15.5px}
+.checks{list-style:none}
+.checks li{padding:10px 0;border-bottom:1px dashed rgba(140,180,255,.18);color:#dceaff;font-size:15px;display:flex;gap:11px;align-items:baseline}
+.checks li:last-child{border-bottom:0}
+.checks li::before{content:"✓";color:#3dff8e;font-weight:800}
+.pro-side{background:rgba(5,10,28,.55);border:1px solid var(--line);border-radius:18px;padding:26px;text-align:center;align-self:start}
+.pro-side .big{font:800 34px 'Sora';background:linear-gradient(90deg,#ffb3c1,var(--red));-webkit-background-clip:text;background-clip:text;color:transparent}
+.pro-side p{font-size:14px;margin:10px 0 20px}
+
+/* help + contact */
+.help-box{margin-top:44px;text-align:center;background:var(--panel);border:1px solid var(--line);border-radius:24px;padding:46px 30px}
+.help-box .ficon{margin:0 auto 16px;width:58px;height:58px;font-size:28px}
+.help-box h3{font-size:25px;margin-bottom:10px}
+.help-box p{color:var(--dim);max-width:540px;margin:0 auto 24px;font-size:15.5px}
+.contact-row{display:flex;gap:14px;justify-content:center;flex-wrap:wrap}
+
+footer{margin-top:90px;border-top:1px solid var(--line);padding:34px 0 40px;text-align:center;color:var(--dim2);font-size:14px}
+footer .brand{font-size:17px;color:#cfe4ff;margin-bottom:6px}
+footer .brand em{font-style:normal;color:var(--red)}
+</style>
+</head>
+<body>
+<div class="aurora"></div><div class="grid-bg"></div>
+<div class="orb a"></div><div class="orb b"></div><div class="orb c"></div>
+
+<nav>
+  <div class="wrap nav-in">
+    <a class="logo" href="#top"><span class="logo-badge">✦</span><span>Nalox <em>Aura</em></span></a>
+    <div class="nav-links">
+      <a href="#features" data-en="Features" data-hi="फीचर्स">Features</a>
+      <a href="#how" data-en="How It Works" data-hi="कैसे काम करता है">How It Works</a>
+      <a href="#tutorial" data-en="Tutorial" data-hi="ट्यूटोरियल">Tutorial</a>
+      <a href="#pro" data-en="PRO" data-hi="PRO">PRO</a>
+      <a href="#help" data-en="Help Desk" data-hi="हेल्प डेस्क">Help Desk</a>
+    </div>
+    <div class="lang-toggle" role="group" aria-label="Language">
+      <button id="btn-en" class="on" onclick="setLang('en')">EN</button>
+      <button id="btn-hi" onclick="setLang('hi')">हिंदी</button>
+    </div>
+  </div>
+</nav>
+
+<header class="hero" id="top">
+  <div class="wrap">
+    <span class="pill"><i></i><span data-en="For Adobe After Effects 2020 and above" data-hi="Adobe After Effects 2020 और उससे ऊपर के लिए">For Adobe After Effects 2020 and above</span></span>
+    <h1>Nalox <span class="grad">Aura</span><br><span data-en="Edit Faster." data-hi="एडिटिंग, अब और तेज़।">Edit Faster.</span> <span class="red" data-en="Create Better." data-hi="क्रिएट करो बेहतर।">Create Better.</span></h1>
+    <p class="sub" data-en="The all-in-one After Effects panel — fonts, presets, animations, captions, graphs, tracking, slow motion, SFX and an AI that builds projects for you. Everything inside one beautiful panel." data-hi="ऑल-इन-वन After Effects पैनल — फ़ॉन्ट्स, प्रीसेट्स, एनिमेशन, कैप्शन, ग्राफ़, ट्रैकिंग, स्लो मोशन, SFX और एक AI जो आपके लिए प्रोजेक्ट बनाता है। सब कुछ एक ही खूबसूरत पैनल में।">The all-in-one After Effects panel — fonts, presets, animations, captions, graphs, tracking, slow motion, SFX and an AI that builds projects for you. Everything inside one beautiful panel.</p>
+    <div class="hero-cta">
+      <a class="btn" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 Get Nalox Aura — DM on Instagram" data-hi="📩 Nalox Aura लो — Instagram पर DM करो">📩 Get Nalox Aura — DM on Instagram</a>
+      <a class="btn ghost" href="#features" data-en="Explore Features ↓" data-hi="फीचर्स देखो ↓">Explore Features ↓</a>
+    </div>
+    <div class="madeby" data-en="Made by" data-hi="बनाया गया">Made by</div>
+    <div class="madeby" style="margin-top:2px"><b>NALOX</b></div>
+
+    <div class="mock" aria-hidden="true">
+      <div class="mock-bar"><span class="dot" style="background:#ff5f57"></span><span class="dot" style="background:#febc2e"></span><span class="dot" style="background:#28c840"></span><span class="mock-title">Nalox Aura <em>v5.0</em></span></div>
+      <div class="mock-tabs">
+        <span class="mtab on">Fonts</span><span class="mtab">Captions</span><span class="mtab">Templates</span><span class="mtab">Presets</span><span class="mtab pro">Nalox AI · PRO</span><span class="mtab">Quick Tools</span><span class="mtab">Graphs</span><span class="mtab">Tracking</span><span class="mtab">SFX</span><span class="mtab">Downloader</span>
+      </div>
+      <div class="mock-body">
+        <div class="mcard"><b>🔤 Fonts</b><span>Google Fonts + DaFont, one-click install</span></div>
+        <div class="mcard"><b>🎛️ 55 Presets</b><span>Select a layer, click, done</span></div>
+        <div class="mcard"><b>✨ 33 Text Animations</b><span>Live preview + Auto-Sync</span></div>
+        <div class="mcard"><b>📈 Graphs</b><span>Ready curves, play before apply</span></div>
+        <div class="mcard"><b>🎯 Tracking</b><span>Stabilize + smooth slow motion</span></div>
+        <div class="mcard hot"><b>🤖 Nalox AI · PRO</b><span>Type it — the project builds itself</span></div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<section id="features">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Everything Inside" data-hi="अंदर क्या-क्या है">Everything Inside</div>
+    <h2 class="title reveal" data-en="One Panel. Every Tool You Need." data-hi="एक पैनल। हर टूल जो चाहिए।">One Panel. Every Tool You Need.</h2>
+    <p class="lead reveal" data-en="Stop switching between ten different scripts and websites. Nalox Aura puts your whole editing workflow in one place." data-hi="दस अलग-अलग स्क्रिप्ट और वेबसाइटों के बीच भागना बंद करो। Nalox Aura आपकी पूरी एडिटिंग एक ही जगह ले आता है।">Stop switching between ten different scripts and websites. Nalox Aura puts your whole editing workflow in one place.</p>
+    <div class="feat-grid">
+      <div class="fcard reveal"><div class="ficon">🔤</div><h3 data-en="Fonts — Google + DaFont" data-hi="फ़ॉन्ट्स — Google + DaFont">Fonts — Google + DaFont</h3><p data-en="Search any font and install it in one click, straight inside the panel. Your installed fonts are listed too — no browser, no manual setup." data-hi="कोई भी फ़ॉन्ट खोजो और एक क्लिक में इंस्टॉल करो, सीधे पैनल के अंदर। आपके इंस्टॉल किए फ़ॉन्ट भी यहीं दिखते हैं — न ब्राउज़र, न मैन्युअल सेटअप।">Search any font and install it in one click, straight inside the panel. Your installed fonts are listed too — no browser, no manual setup.</p></div>
+      <div class="fcard reveal"><div class="ficon">🎛️</div><h3><span data-en="55 Ready Presets" data-hi="55 तैयार प्रीसेट्स">55 Ready Presets</span><span class="tag blue" data-en="BIG LIBRARY" data-hi="बड़ी लाइब्रेरी">BIG LIBRARY</span></h3><p data-en="Colour grading, text styles, glow, shakes and more — organised in big clear cards. Select a layer, click a preset, done. Add your own presets too." data-hi="कलर ग्रेडिंग, टेक्स्ट स्टाइल, ग्लो, शेक और बहुत कुछ — बड़े साफ़ कार्ड्स में। लेयर चुनो, प्रीसेट पर क्लिक करो, हो गया। अपने प्रीसेट भी जोड़ सकते हो।">Colour grading, text styles, glow, shakes and more — organised in big clear cards. Select a layer, click a preset, done. Add your own presets too.</p></div>
+      <div class="fcard reveal"><div class="ficon">✨</div><h3 data-en="33 Text Animations" data-hi="33 टेक्स्ट एनिमेशन">33 Text Animations</h3><p data-en="Bounce, wave, decode, cascade, typewriter and more — watch a live preview before you apply. Auto-Sync animates every selected layer from its own in-point." data-hi="बाउंस, वेव, डिकोड, कैस्केड, टाइपराइटर और बहुत कुछ — लगाने से पहले लाइव प्रीव्यू देखो। Auto-Sync हर चुनी हुई लेयर को उसके अपने इन-पॉइंट से एनिमेट करता है।">Bounce, wave, decode, cascade, typewriter and more — watch a live preview before you apply. Auto-Sync animates every selected layer from its own in-point.</p></div>
+      <div class="fcard reveal"><div class="ficon">💬</div><h3 data-en="Auto Captions + Karaoke" data-hi="ऑटो कैप्शन + कराओके">Auto Captions + Karaoke</h3><p data-en="Import an SRT file or paste your lines — captions land on the timeline, perfectly timed. Styles include Clean, Bold Pop, Boxed, Minimal and word-by-word Karaoke highlight." data-hi="SRT फ़ाइल लाओ या अपनी लाइनें पेस्ट करो — कैप्शन टाइमलाइन पर एकदम सही समय पर लग जाते हैं। स्टाइल में Clean, Bold Pop, Boxed, Minimal और शब्द-दर-शब्द कराओके हाइलाइट शामिल हैं।">Import an SRT file or paste your lines — captions land on the timeline, perfectly timed. Styles include Clean, Bold Pop, Boxed, Minimal and word-by-word Karaoke highlight.</p></div>
+      <div class="fcard reveal"><div class="ficon">🎬</div><h3 data-en="22 Templates + Scenes" data-hi="22 टेम्पलेट्स + सीन्स">22 Templates + Scenes</h3><p data-en="Titles, lower thirds, subscribe buttons, countdowns, plus ready scenes and mockups — phone, laptop, chat UI, notifications, glass cards and animated backgrounds." data-hi="टाइटल, लोअर थर्ड, सब्सक्राइब बटन, काउंटडाउन, साथ में तैयार सीन और मॉकअप — फ़ोन, लैपटॉप, चैट UI, नोटिफ़िकेशन, ग्लास कार्ड और एनिमेटेड बैकग्राउंड।">Titles, lower thirds, subscribe buttons, countdowns, plus ready scenes and mockups — phone, laptop, chat UI, notifications, glass cards and animated backgrounds.</p></div>
+      <div class="fcard reveal"><div class="ficon">📈</div><h3 data-en="Graphs Library" data-hi="ग्राफ़ लाइब्रेरी">Graphs Library</h3><p data-en="Ready-made easing and speed graphs, drawn as real curves. Press play, watch the motion, then apply — zoom ramps, slow-to-fast, overshoot and more." data-hi="तैयार ईज़िंग और स्पीड ग्राफ़, असली कर्व के रूप में बने हुए। प्ले दबाओ, मोशन देखो, फिर लगाओ — ज़ूम रैंप, स्लो-टू-फ़ास्ट, ओवरशूट और बहुत कुछ।">Ready-made easing and speed graphs, drawn as real curves. Press play, watch the motion, then apply — zoom ramps, slow-to-fast, overshoot and more.</p></div>
+      <div class="fcard reveal"><div class="ficon">📳</div><h3 data-en="Shake Studio + Copy Shake" data-hi="शेक स्टूडियो + कॉपी शेक">Shake Studio + Copy Shake</h3><p data-en="Vertical, horizontal, 4D and zoom shakes with amount and speed sliders — plus Copy Shake: give it a reference video and it recreates that camera shake in your comp." data-hi="वर्टिकल, हॉरिज़ॉन्टल, 4D और ज़ूम शेक, अमाउंट और स्पीड स्लाइडर के साथ — साथ में Copy Shake: एक रेफ़रेंस वीडियो दो, और वह कैमरा शेक आपके कॉम्प में बन जाएगा।">Vertical, horizontal, 4D and zoom shakes with amount and speed sliders — plus Copy Shake: give it a reference video and it recreates that camera shake in your comp.</p></div>
+      <div class="fcard reveal"><div class="ficon">🎯</div><h3 data-en="Tracking and Stabilization" data-hi="ट्रैकिंग और स्टेबिलाइज़ेशन">Tracking and Stabilization</h3><p data-en="Warp Stabilizer, 3D Camera Tracker and Track Motion — each one click away, in its own tab, with big clear controls." data-hi="Warp Stabilizer, 3D Camera Tracker और Track Motion — हर एक बस एक क्लिक दूर, अपने अलग टैब में, बड़े साफ़ कंट्रोल के साथ।">Warp Stabilizer, 3D Camera Tracker and Track Motion — each one click away, in its own tab, with big clear controls.</p></div>
+      <div class="fcard reveal"><div class="ficon">⏱️</div><h3 data-en="Smooth Slow Motion" data-hi="स्मूद स्लो मोशन">Smooth Slow Motion</h3><p data-en="Type the range, pick the speed, and get buttery slow motion with Pixel Motion frame blending and smooth ramps — no jerky frames." data-hi="रेंज लिखो, स्पीड चुनो, और पाओ मक्खन-जैसा स्मूद स्लो मोशन — Pixel Motion फ़्रेम ब्लेंडिंग और स्मूद रैंप के साथ, बिना झटके वाले फ़्रेम के।">Type the range, pick the speed, and get buttery slow motion with Pixel Motion frame blending and smooth ramps — no jerky frames.</p></div>
+      <div class="fcard reveal"><div class="ficon">🔊</div><h3 data-en="SFX Library" data-hi="SFX लाइब्रेरी">SFX Library</h3><p data-en="Whoosh, riser, impact, pop, glitch and more — preview the waveform, press play, and drop the sound onto your playhead. Add your own SFX folder too." data-hi="वूश, राइज़र, इम्पैक्ट, पॉप, ग्लिच और बहुत कुछ — वेवफ़ॉर्म देखो, प्ले करो, और साउंड को सीधे प्लेहेड पर डाल दो। अपना SFX फ़ोल्डर भी जोड़ सकते हो।">Whoosh, riser, impact, pop, glitch and more — preview the waveform, press play, and drop the sound onto your playhead. Add your own SFX folder too.</p></div>
+      <div class="fcard reveal"><div class="ficon">⬇️</div><h3 data-en="Downloader" data-hi="डाउनलोडर">Downloader</h3><p data-en="Paste a video link, pick the quality, and the video downloads and imports straight into your project. Only download media you own or have permission to use." data-hi="वीडियो लिंक पेस्ट करो, क्वालिटी चुनो, और वीडियो डाउनलोड होकर सीधे आपके प्रोजेक्ट में आ जाएगा। सिर्फ़ वही मीडिया डाउनलोड करो जो आपका है या जिसके लिए आपके पास अनुमति है।">Paste a video link, pick the quality, and the video downloads and imports straight into your project. Only download media you own or have permission to use.</p></div>
+      <div class="fcard reveal"><div class="ficon">🧰</div><h3 data-en="Quick Tools" data-hi="क्विक टूल्स">Quick Tools</h3><p data-en="Layer Controller, Project Cleaner, Essential Effects, Bouncer, keyframe tools and beat markers — the small jobs that eat your day, finished in one click." data-hi="लेयर कंट्रोलर, प्रोजेक्ट क्लीनर, एसेंशियल इफ़ेक्ट्स, बाउंसर, कीफ़्रेम टूल्स और बीट मार्कर — छोटे-छोटे काम जो आपका दिन खा जाते हैं, एक क्लिक में ख़त्म।">Layer Controller, Project Cleaner, Essential Effects, Bouncer, keyframe tools and beat markers — the small jobs that eat your day, finished in one click.</p></div>
+      <div class="fcard pro reveal"><div class="ficon">🤖</div><h3><span data-en="Nalox AI" data-hi="Nalox AI">Nalox AI</span><span class="tag">PRO</span></h3><p data-en="Chat with an AI that knows your project — or switch to Agent mode and watch it build: give it a folder and it creates the project, imports your media and lays out the comp, step by step, in front of you." data-hi="एक AI से चैट करो जो आपके प्रोजेक्ट को जानता है — या Agent मोड में देखो उसे बनाते हुए: एक फ़ोल्डर दो और वह प्रोजेक्ट बनाएगा, आपका मीडिया लाएगा और कॉम्प सजाएगा, कदम-दर-कदम, आपकी आँखों के सामने।">Chat with an AI that knows your project — or switch to Agent mode and watch it build: give it a folder and it creates the project, imports your media and lays out the comp, step by step, in front of you.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="how">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Getting Started" data-hi="शुरुआत कैसे करें">Getting Started</div>
+    <h2 class="title reveal" data-en="How It Works" data-hi="कैसे काम करता है">How It Works</h2>
+    <p class="lead reveal" data-en="From download to editing in about two minutes." data-hi="डाउनलोड से एडिटिंग तक, लगभग दो मिनट में।">From download to editing in about two minutes.</p>
+    <div class="steps">
+      <div class="step reveal"><div class="snum">1</div><h3 data-en="Install" data-hi="इंस्टॉल करो">Install</h3><p data-en="Unzip the file and double-click INSTALL.bat — everything sets itself up. Open After Effects and pick Nalox Aura from the Extensions menu." data-hi="फ़ाइल अनज़िप करो और INSTALL.bat पर डबल-क्लिक करो — सब कुछ अपने आप सेट हो जाएगा। After Effects खोलो और Extensions मेनू से Nalox Aura चुनो।">Unzip the file and double-click INSTALL.bat — everything sets itself up. Open After Effects and pick Nalox Aura from the Extensions menu.</p></div>
+      <div class="step reveal"><div class="snum">2</div><h3 data-en="Subscribe + Follow" data-hi="सब्सक्राइब + फ़ॉलो">Subscribe + Follow</h3><p data-en="The first time you open Aura, a welcome screen asks you to subscribe on YouTube and follow on Instagram. Do both, and the panel unlocks forever." data-hi="पहली बार Aura खोलने पर एक वेलकम स्क्रीन आपसे YouTube पर सब्सक्राइब और Instagram पर फ़ॉलो करने को कहेगी। दोनों करो, और पैनल हमेशा के लिए खुल जाएगा।">The first time you open Aura, a welcome screen asks you to subscribe on YouTube and follow on Instagram. Do both, and the panel unlocks forever.</p></div>
+      <div class="step reveal"><div class="snum">3</div><h3 data-en="DM for Your PRO Code" data-hi="PRO कोड के लिए DM करो">DM for Your PRO Code</h3><p data-en="Everything is free to use — only Nalox AI is PRO. Message us on Instagram, get your personal 6-digit code, and unlock the AI on your PC." data-hi="सब कुछ इस्तेमाल के लिए खुला है — सिर्फ़ Nalox AI PRO है। Instagram पर मैसेज करो, अपना पर्सनल 6-अंकों का कोड लो, और अपने PC पर AI अनलॉक करो।">Everything is free to use — only Nalox AI is PRO. Message us on Instagram, get your personal 6-digit code, and unlock the AI on your PC.</p></div>
+      <div class="step reveal"><div class="snum">4</div><h3 data-en="Auto Updates" data-hi="ऑटो अपडेट्स">Auto Updates</h3><p data-en="When a new version releases, your panel shows it. One click downloads and installs it — you always stay on the latest Nalox Aura." data-hi="जब नया वर्शन आएगा, आपका पैनल उसे दिखाएगा। एक क्लिक में डाउनलोड और इंस्टॉल — आप हमेशा सबसे नए Nalox Aura पर रहोगे।">When a new version releases, your panel shows it. One click downloads and installs it — you always stay on the latest Nalox Aura.</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="tutorial">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Learn Fast" data-hi="जल्दी सीखो">Learn Fast</div>
+    <h2 class="title reveal" data-en="Quick Tutorial" data-hi="क्विक ट्यूटोरियल">Quick Tutorial</h2>
+    <p class="lead reveal" data-en="The five things every editor asks first — each takes under a minute." data-hi="पाँच चीज़ें जो हर एडिटर सबसे पहले पूछता है — हर एक में एक मिनट से कम लगेगा।">The five things every editor asks first — each takes under a minute.</p>
+    <div class="tuts">
+      <div class="tut reveal"><h3>🛠️ <span data-en="Install Nalox Aura" data-hi="Nalox Aura इंस्टॉल करो">Install Nalox Aura</span></h3><ol>
+        <li data-en="Unzip the downloaded file." data-hi="डाउनलोड की गई फ़ाइल अनज़िप करो।">Unzip the downloaded file.</li>
+        <li data-en="Double-click INSTALL.bat and wait for the success message." data-hi="INSTALL.bat पर डबल-क्लिक करो और सक्सेस मैसेज का इंतज़ार करो।">Double-click <b>INSTALL.bat</b> and wait for the success message.</li>
+        <li data-en="Restart After Effects, then open Window → Extensions → Nalox Aura." data-hi="After Effects दोबारा खोलो, फिर Window → Extensions → Nalox Aura खोलो।">Restart After Effects, then open <b>Window → Extensions → Nalox Aura</b>.</li>
+        <li data-en="Complete the one-time welcome screen (Subscribe + Follow) to unlock the panel." data-hi="पैनल अनलॉक करने के लिए एक बार की वेलकम स्क्रीन पूरी करो (सब्सक्राइब + फ़ॉलो)।">Complete the one-time welcome screen (Subscribe + Follow) to unlock the panel.</li>
+      </ol></div>
+      <div class="tut reveal"><h3>🔤 <span data-en="Install a Font" data-hi="फ़ॉन्ट इंस्टॉल करो">Install a Font</span></h3><ol>
+        <li data-en="Open the Fonts tab and type the font name in search." data-hi="Fonts टैब खोलो और सर्च में फ़ॉन्ट का नाम लिखो।">Open the <b>Fonts</b> tab and type the font name in search.</li>
+        <li data-en="Pick Google Fonts or DaFont as the source." data-hi="सोर्स के रूप में Google Fonts या DaFont चुनो।">Pick <b>Google Fonts</b> or <b>DaFont</b> as the source.</li>
+        <li data-en="Press Install on the card — the font is added to your PC automatically." data-hi="कार्ड पर Install दबाओ — फ़ॉन्ट अपने आप आपके PC में जुड़ जाएगा।">Press <b>Install</b> on the card — the font is added to your PC automatically.</li>
+        <li data-en="Use it in any text layer right away." data-hi="उसे तुरंत किसी भी टेक्स्ट लेयर में इस्तेमाल करो।">Use it in any text layer right away.</li>
+      </ol></div>
+      <div class="tut reveal"><h3>🎛️ <span data-en="Apply a Preset" data-hi="प्रीसेट लगाओ">Apply a Preset</span></h3><ol>
+        <li data-en="Select the layer in your composition first." data-hi="पहले अपने कॉम्पोज़िशन में लेयर चुनो।">Select the layer in your composition <b>first</b>.</li>
+        <li data-en="Open the Presets tab and pick a category." data-hi="Presets टैब खोलो और एक कैटेगरी चुनो।">Open the <b>Presets</b> tab and pick a category.</li>
+        <li data-en="Click a preset card — it applies instantly." data-hi="प्रीसेट कार्ड पर क्लिक करो — वह तुरंत लग जाएगा।">Click a preset card — it applies instantly.</li>
+        <li data-en="Presets marked Deep Glow need the Deep Glow plug-in on your PC." data-hi="Deep Glow लिखे प्रीसेट्स के लिए आपके PC पर Deep Glow प्लग-इन होना चाहिए।">Presets marked <b>Deep Glow</b> need the Deep Glow plug-in on your PC.</li>
+      </ol></div>
+      <div class="tut reveal"><h3>🤖 <span data-en="Unlock Nalox AI PRO" data-hi="Nalox AI PRO अनलॉक करो">Unlock Nalox AI PRO</span></h3><ol>
+        <li data-en="Open the Nalox AI tab — it shows your PC's Machine Code." data-hi="Nalox AI टैब खोलो — वहाँ आपके PC का Machine Code दिखेगा।">Open the <b>Nalox AI</b> tab — it shows your PC's <b>Machine Code</b>.</li>
+        <li data-en="Send that code to us in an Instagram DM." data-hi="वह कोड हमें Instagram DM में भेजो।">Send that code to us in an <b>Instagram DM</b>.</li>
+        <li data-en="You receive your personal 6-digit PRO code — one code works on one PC only." data-hi="आपको अपना पर्सनल 6-अंकों का PRO कोड मिलेगा — एक कोड सिर्फ़ एक PC पर चलता है।">You receive your personal <b>6-digit PRO code</b> — one code works on one PC only.</li>
+        <li data-en="Type the code in the panel — Nalox AI unlocks: chat, agent mode and project building." data-hi="कोड पैनल में लिखो — Nalox AI खुल जाएगा: चैट, Agent मोड और प्रोजेक्ट बनाना।">Type the code in the panel — Nalox AI unlocks: chat, agent mode and project building.</li>
+      </ol></div>
+      <div class="tut reveal"><h3>🔄 <span data-en="Update to the Latest Version" data-hi="सबसे नए वर्शन पर अपडेट करो">Update to the Latest Version</span></h3><ol>
+        <li data-en="When an update is ready, the panel header shows an Update pill." data-hi="जब अपडेट तैयार होगा, पैनल के ऊपर Update का निशान दिखेगा।">When an update is ready, the panel header shows an <b>Update</b> pill.</li>
+        <li data-en="Open Settings → Updates and press Download and Install." data-hi="Settings → Updates खोलो और Download and Install दबाओ।">Open <b>Settings → Updates</b> and press <b>Download and Install</b>.</li>
+        <li data-en="Close and reopen the panel — you are on the new version." data-hi="पैनल बंद करके दोबारा खोलो — आप नए वर्शन पर हो।">Close and reopen the panel — you are on the new version.</li>
+      </ol></div>
+      <div class="tut reveal"><h3>💬 <span data-en="Make Captions in Seconds" data-hi="सेकंडों में कैप्शन बनाओ">Make Captions in Seconds</span></h3><ol>
+        <li data-en="Open the Captions tab and import your SRT file — or paste lines, one per caption." data-hi="Captions टैब खोलो और अपनी SRT फ़ाइल लाओ — या लाइनें पेस्ट करो, एक लाइन एक कैप्शन।">Open the <b>Captions</b> tab and import your SRT file — or paste lines, one per caption.</li>
+        <li data-en="Choose a style: Clean, Bold Pop, Boxed, Minimal or Karaoke." data-hi="एक स्टाइल चुनो: Clean, Bold Pop, Boxed, Minimal या Karaoke।">Choose a style: Clean, Bold Pop, Boxed, Minimal or <b>Karaoke</b>.</li>
+        <li data-en="Set the size and highlight colour, then press Build — captions appear as timed text layers." data-hi="साइज़ और हाइलाइट रंग सेट करो, फिर Build दबाओ — कैप्शन समय के साथ टेक्स्ट लेयर के रूप में आ जाएँगे।">Set the size and highlight colour, then press <b>Build</b> — captions appear as timed text layers.</li>
+      </ol></div>
+    </div>
+  </div>
+</section>
+
+<section id="pro">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Pricing" data-hi="कीमत">Pricing</div>
+    <h2 class="title reveal" data-en="Everything Included. One PRO Superpower." data-hi="सब कुछ शामिल। एक PRO सुपरपावर।">Everything Included. One PRO Superpower.</h2>
+    <div class="pro-box reveal">
+      <div>
+        <h3><span data-en="Nalox AI is" data-hi="Nalox AI है">Nalox AI is</span> <span class="red">PRO</span></h3>
+        <p data-en="Fonts, presets, animations, captions, templates, graphs, shakes, tracking, slow motion, SFX, the downloader and all quick tools are included for every user. The one PRO feature is Nalox AI — the assistant that chats about your project and builds whole projects from a folder, step by step." data-hi="फ़ॉन्ट्स, प्रीसेट्स, एनिमेशन, कैप्शन, टेम्पलेट्स, ग्राफ़, शेक, ट्रैकिंग, स्लो मोशन, SFX, डाउनलोडर और सभी क्विक टूल्स हर यूज़र के लिए शामिल हैं। एकमात्र PRO फ़ीचर है Nalox AI — वह असिस्टेंट जो आपके प्रोजेक्ट के बारे में चैट करता है और एक फ़ोल्डर से पूरे प्रोजेक्ट बनाता है, कदम-दर-कदम।">Fonts, presets, animations, captions, templates, graphs, shakes, tracking, slow motion, SFX, the downloader and all quick tools are included for every user. The one PRO feature is <b>Nalox AI</b> — the assistant that chats about your project and builds whole projects from a folder, step by step.</p>
+        <ul class="checks" style="margin-top:18px">
+          <li data-en="Chat mode — answers with full knowledge of your open project" data-hi="चैट मोड — आपके खुले प्रोजेक्ट की पूरी जानकारी के साथ जवाब">Chat mode — answers with full knowledge of your open project</li>
+          <li data-en="Agent mode — builds projects from your materials folder automatically" data-hi="Agent मोड — आपके मटेरियल फ़ोल्डर से अपने आप प्रोजेक्ट बनाता है">Agent mode — builds projects from your materials folder automatically</li>
+          <li data-en="No-folder mode — finds media for you and builds the project" data-hi="नो-फ़ोल्डर मोड — आपके लिए मीडिया खोजकर प्रोजेक्ट बनाता है">No-folder mode — finds media for you and builds the project</li>
+          <li data-en="One personal 6-digit code — locked to your PC only" data-hi="एक पर्सनल 6-अंकों का कोड — सिर्फ़ आपके PC के लिए लॉक">One personal 6-digit code — locked to your PC only</li>
+          <li data-en="Free updates for the panel, delivered in-panel" data-hi="पैनल के लिए मुफ़्त अपडेट, पैनल के अंदर ही मिलते हैं">Free updates for the panel, delivered in-panel</li>
+        </ul>
+      </div>
+      <div class="pro-side">
+        <div class="big">PRO</div>
+        <p data-en="Unlock Nalox AI with your personal code. To get your code, send your Machine Code in an Instagram DM — we reply with your 6-digit key." data-hi="अपने पर्सनल कोड से Nalox AI अनलॉक करो। कोड पाने के लिए अपना Machine Code Instagram DM में भेजो — हम आपके 6-अंकों के कोड के साथ जवाब देंगे।">Unlock Nalox AI with your personal code. To get your code, send your Machine Code in an Instagram DM — we reply with your 6-digit key.</p>
+        <a class="btn red" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 DM to Unlock PRO" data-hi="📩 PRO अनलॉक के लिए DM करो">📩 DM to Unlock PRO</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="help">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Support" data-hi="सपोर्ट">Support</div>
+    <h2 class="title reveal" data-en="Help Desk" data-hi="हेल्प डेस्क">Help Desk</h2>
+    <div class="help-box reveal">
+      <div class="ficon">🛟</div>
+      <h3 data-en="Stuck? We Solve It For You." data-hi="अटक गए? हम सॉल्व कर देंगे।">Stuck? We Solve It For You.</h3>
+      <p data-en="Install problem, a feature not working, a code that will not unlock — whatever it is, send us a message on Instagram with a screenshot. Tell us what happened, and we will solve it for you. Your messages also show us what to fix in the next update." data-hi="इंस्टॉल की दिक्कत, कोई फ़ीचर काम नहीं कर रहा, कोड अनलॉक नहीं हो रहा — जो भी हो, हमें Instagram पर स्क्रीनशॉट के साथ मैसेज भेजो। बताओ क्या हुआ, और हम आपके लिए सॉल्व कर देंगे। आपके मैसेज हमें यह भी दिखाते हैं कि अगले अपडेट में क्या ठीक करना है।">Install problem, a feature not working, a code that will not unlock — whatever it is, send us a message on Instagram with a screenshot. Tell us what happened, and we will solve it for you. Your messages also show us what to fix in the next update.</p>
+      <a class="btn" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📩 Message the Help Desk" data-hi="📩 हेल्प डेस्क को मैसेज करो">📩 Message the Help Desk</a>
+    </div>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="wrap">
+    <div class="kicker reveal" data-en="Contact" data-hi="संपर्क">Contact</div>
+    <h2 class="title reveal" data-en="Talk to Nalox" data-hi="Nalox से बात करो">Talk to Nalox</h2>
+    <p class="lead reveal" data-en="One place for everything — downloads, PRO codes and help. Message on Instagram, and subscribe on YouTube so you never miss an update." data-hi="हर चीज़ के लिए एक ही जगह — डाउनलोड, PRO कोड और मदद। Instagram पर मैसेज करो, और YouTube पर सब्सक्राइब करो ताकि कोई अपडेट न छूटे।">One place for everything — downloads, PRO codes and help. Message on Instagram, and subscribe on YouTube so you never miss an update.</p>
+    <div class="contact-row reveal" style="margin-top:32px">
+      <a class="btn red" href="https://www.instagram.com/nalox_ff" target="_blank" rel="noopener" data-en="📸 Instagram — @nalox_ff (DM)" data-hi="📸 Instagram — @nalox_ff (DM)">📸 Instagram — @nalox_ff (DM)</a>
+      <a class="btn" href="https://www.youtube.com/@naloxff?sub_confirmation=1" target="_blank" rel="noopener" data-en="▶️ YouTube — Subscribe @naloxff" data-hi="▶️ YouTube — @naloxff सब्सक्राइब करो">▶️ YouTube — Subscribe @naloxff</a>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="wrap">
+    <div class="brand">Nalox <em>Aura</em></div>
+    <div data-en="The all-in-one After Effects panel — fonts, presets, animations, captions, graphs, tracking, slow motion, SFX and Nalox AI." data-hi="ऑल-इन-वन After Effects पैनल — फ़ॉन्ट्स, प्रीसेट्स, एनिमेशन, कैप्शन, ग्राफ़, ट्रैकिंग, स्लो मोशन, SFX और Nalox AI।">The all-in-one After Effects panel — fonts, presets, animations, captions, graphs, tracking, slow motion, SFX and Nalox AI.</div>
+    <div style="margin-top:14px" data-en="Made by Nalox · © 2026 Nalox. All rights reserved." data-hi="Made by Nalox · © 2026 Nalox। सर्वाधिकार सुरक्षित।">Made by Nalox · © 2026 Nalox. All rights reserved.</div>
+  </div>
+</footer>
+
+<script>
+function setLang(lang){
+  document.querySelectorAll('[data-en]').forEach(function(el){
+    var t = el.getAttribute(lang === 'hi' ? 'data-hi' : 'data-en');
+    if(t !== null){ el.textContent = t; }
+  });
+  document.getElementById('btn-en').classList.toggle('on', lang === 'en');
+  document.getElementById('btn-hi').classList.toggle('on', lang === 'hi');
+  document.documentElement.lang = lang === 'hi' ? 'hi' : 'en';
+  try{ localStorage.setItem('aura-lang', lang); }catch(e){}
+}
+(function(){
+  var saved = 'en';
+  try{ saved = localStorage.getItem('aura-lang') || 'en'; }catch(e){}
+  if(saved === 'hi'){ setLang('hi'); }
+  var io = new IntersectionObserver(function(entries){
+    entries.forEach(function(en){ if(en.isIntersecting){ en.target.classList.add('in'); io.unobserve(en.target); } });
+  }, {threshold: .12});
+  document.querySelectorAll('.reveal').forEach(function(el){ io.observe(el); });
+})();
+</script>
+</body>
+</html>
