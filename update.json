@@ -1,5 +1,1 @@
-{
-  "version": "5.1",
-  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v5.1/nalox-aura-v5.1.zip",
-  "notes": "v5.1 fixes from your feedback: SFX sounds play again, text animations start at the layer (not the playhead), Google Fonts <-> DaFont cross-search, Settings repair bad composition sizes, Graphs work without selected keyframes, Captions guide you + provider keys now live in Settings too, the panel opens with a loading screen, installed fonts grouped by family, the locked Nalox AI tab turns the whole panel red, preset cards are distinct — plus NEW Font Finder: identify a font from a screenshot in the Fonts tab."
-}
+{"notes":"v5.2 hotfix: Nalox AI planner + chat work again with logged-in accounts (Login with Google / Gemini, Claude, Codex) — v5.0/v5.1 failed those requests instantly even when an account was connected. Font Finder now keeps the screenshot you picked (the preview shows it right away and Identify Font works — the image is captured when you pick it, not re-read later). Internal panel errors show one clear, actionable message instead of raw technical text. Your settings, keys and PRO unlock carry over.","version":"5.2","zipUrl":"https://github.com/arjun408408/nalox-aura/releases/download/v5.2/nalox-aura-v5.2.zip"}
