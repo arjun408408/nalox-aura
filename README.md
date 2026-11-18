@@ -19,6 +19,8 @@
 3. **Run `SETUP.bat` once** — it installs the tools Aura needs (yt-dlp + ffmpeg), creates your folders, guides the one-time YouTube sign-in and checks that everything works.
 4. Open After Effects → **Window → Extensions → Nalox Aura**. Done.
 
+**This setup is first-time only.** The recommended sign-in is Firefox: sign in to YouTube in Firefox once, and Aura reads it fresh by itself every time after that — nothing to export, nothing to redo.
+
 After that, updates arrive **inside the panel** — you never need to download again.
 
 **Requirements:** Windows 10/11 • Adobe After Effects 2022 or newer.
