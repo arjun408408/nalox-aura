@@ -1,5 +1,1 @@
-{
-  "version": "7.0",
-  "notes": "THE FINAL UPDATE: Graphs Pro with My Curves + Read from Keys + EaseCopy, Quick Launch + Snapshot, one-click Animate strip, 12 Behaviors, Keyframe & Timeline Toolkit, My Animations, Background Render, True Comp Duplicator, a built-in Music Player and light Snowfall \u2014 plus fully polished Settings and everything from v6.7.",
-  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v7.0/nalox-aura-v7.0.zip"
-}
+{"notes":"Text animations fixed for real (rebuilt on one correct construction — the add-property error is gone), 12 NEW Title Presets with animated previews, the NEW SFX Sequencer, and AI routes that survive very long prompts. PLUS: the DaVinci Resolve edition (v1.1) is now inside this same package — unzip and run INSTALL-DAVINCI.bat from the NaloxAuraResolve folder. One PRO code unlocks both editions.","version":"7.1","zipUrl":"https://github.com/arjun408408/nalox-aura/releases/download/v7.1/nalox-aura-v7.1-combined.zip"}
