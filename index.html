@@ -115,7 +115,7 @@ p.lead{text-align:center;color:var(--dim);max-width:620px;margin:0 auto;font-siz
 @media(max-width:960px){.feat-grid{grid-template-columns:repeat(2,1fr)}}
 @media(max-width:600px){.feat-grid{grid-template-columns:1fr}}
 .fcard{background:var(--panel);border:1px solid var(--line);border-radius:18px;padding:24px 22px;position:relative;overflow:hidden;transition:.3s}
-.fcard::before{content:"";position:absolute;inset:0;background:radial-gradient(420px 200px at 20% -10%,rgba(56,182,255,.16),transparent 65%);opacity:0;transition:.3s}
+.fcard::before{content:"";position:absolute;inset:0;pointer-events:none;background:radial-gradient(420px 200px at 20% -10%,rgba(56,182,255,.16),transparent 65%);opacity:0;transition:.3s}
 .fcard:hover{transform:translateY(-5px);border-color:rgba(140,195,255,.5);box-shadow:0 18px 44px rgba(10,40,110,.45)}
 .fcard:hover::before{opacity:1}
 .ficon{width:50px;height:50px;border-radius:14px;display:grid;place-items:center;font-size:24px;background:linear-gradient(135deg,rgba(47,123,255,.35),rgba(56,182,255,.15));border:1px solid rgba(140,195,255,.35);margin-bottom:15px}
