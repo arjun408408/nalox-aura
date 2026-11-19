@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://arjun408408.github.io/nalox-aura/sitemap.xml
