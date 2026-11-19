@@ -1,5 +1,5 @@
 {
-  "version": "6.5.2",
-  "notes": "Image Search now finds web images the way Google does, with a PNG / transparent button. Song Finder downloads are fixed for real — a Windows quirk was hiding the saved file's address. Nalox AI no longer cuts off slow logged-in accounts and now names the real reason if it cannot finish.",
-  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v6.5.2/nalox-aura-v6.5.2.zip"
+  "version": "6.6",
+  "notes": "NEW Search Song: trending charts (India & Global), in-panel previews, download or import with Slow + Reverb and Sped Up versions, and star favorites. Sign-in is now Connect-only — one click in Nalox Connect, the old browser steps are gone.",
+  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v6.6/nalox-aura-v6.6.zip"
 }
