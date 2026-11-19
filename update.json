@@ -1,1 +1,5 @@
-{"notes": "v6.5.1 - Hotfix: Song Finder downloads now always land. If the saving tool finishes without clearly saying where it put the song, Nalox Aura now finds the file in the downloads folder and uses it - and Diagnostics records exactly what happened, so a failed download is never a mystery again. Everything from v6.5 is included: one-click Nalox Connect, the in-panel Tutorial video, Song Finder previews with a Stop button, and Image Search. Your settings, keys and PRO unlock carry over.", "version": "6.5.1", "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v6.5.1/nalox-aura-v6.5.1.zip"}
+{
+  "version": "6.5.2",
+  "notes": "Image Search now finds web images the way Google does, with a PNG / transparent button. Song Finder downloads are fixed for real — a Windows quirk was hiding the saved file's address. Nalox AI no longer cuts off slow logged-in accounts and now names the real reason if it cannot finish.",
+  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v6.5.2/nalox-aura-v6.5.2.zip"
+}
