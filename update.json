@@ -1,5 +1,5 @@
 {
-  "version": "6.6",
-  "notes": "NEW Search Song: trending charts (India & Global), in-panel previews, download or import with Slow + Reverb and Sped Up versions, and star favorites. Sign-in is now Connect-only — one click in Nalox Connect, the old browser steps are gone.",
-  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v6.6/nalox-aura-v6.6.zip"
+  "version": "6.7",
+  "notes": "NEW Send to Aura: right-click a YouTube or Instagram page in Chrome and Download or Clip it straight into After Effects. Instagram & Facebook downloads in the panel, Page Media Grab, a sign-in that refreshes itself, and Text Animations that create their own YOUR TEXT HERE layer.",
+  "zipUrl": "https://github.com/arjun408408/nalox-aura/releases/download/v6.7/nalox-aura-v6.7.zip"
 }
